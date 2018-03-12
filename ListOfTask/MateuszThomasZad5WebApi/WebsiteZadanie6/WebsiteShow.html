@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Show</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="fonts/loader.css" /> 
+    <meta charset="utf-8" />
+</head>
+<body onload="loadStudents('#selectStudentShowTask');">
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <center><h1 class="display-2">Notatnik studenckich zadań</h1></center>
+        </div>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" id="nav-link-active" href="#">Wyświetlanie danych</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="WebsiteModifyStudents.html">Edycja danych o studentach</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="WebsiteModifyTasks.html">Edycja zadań</a>
+        </li>
+    </ul>
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <center><a class="btn btn-primary " onclick="SelectUniversityStudents(1, '#firstUniversity');" role="button">Politechnika Wrocławska</a>
+                <a class="btn btn-info" role="button" onclick="CleanField('#firstUniversity');">Ukryj</a></center>
+                <ul class="list-group" id="firstUniversity"/>
+            </div>
+            <div class="col-md-4">
+                <center><a class="btn btn-primary " onclick="SelectUniversityStudents(2, '#secondUniversity');" role="button">Uniwersytet Wrocławski</a>
+                    <a class="btn btn-info" role="button" onclick="CleanField('#secondUniversity');">Ukryj</a></center>
+                <ul class="list-group" id="secondUniversity"/>
+            </div>
+            <div class="col-md-4">
+                <center><a class="btn btn-primary " onclick="SelectUniversityStudents(3, '#thirdUniversity');" role="button">Uniwersytet Medyczny we Wrocławiu</a>
+                    <a class="btn btn-info" role="button" onclick="CleanField('#thirdUniversity');">Ukryj</a></center>
+                <ul class="list-group" id="thirdUniversity"/>
+            </div>
+        </div>
+    </p>
+    <h1>Wybierz studenta:</h1>
+    <div class="input-group">
+        <span class="input-group-addon">Wybierz studenta</span>
+        <select class="selectpicker" id="selectStudentShowTask"></select>
+        <button id="post" class="btn btn-primary" onclick="LoadDataStudentAndStudentTasks();">
+            Wybierz
+        </button>
+    </div>
+    <br/>
+    <div class="input-group">
+        <span class="input-group-addon">Imie</span>
+        <input type="text" class="form-control" id="studentNameShow"
+               placeholder="imie studenta" disable/>
+        <span class="input-group-addon">Nazwisko</span>
+        <input type="text" class="form-control" id="studentSurnameShow"
+               placeholder="nazwisko studenta" disable/>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">Email</span>
+        <input type="text" class="form-control" id="studentEmailShow"
+               placeholder="numer email studenta" disable/>
+        <span class="input-group-addon">Numer telefonu</span>
+        <input type="text" class="form-control" id="studentPhoneNumberShow"
+               placeholder="numer telefonu studenta" disable/>
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">Numer indeksu</span>
+        <input type="text" class="form-control" id="studentIndexNumberShow"
+               placeholder="numer indeksu studenta" disable/>
+        <span class="input-group-addon">Numer ID uczelni</span>
+        <input type="text" class="form-control" id="idNumberUniversityStudentShow"
+               placeholder="numer ID uczelni do której uczęszcza student" disable/>
+    </div>
+    <h2>Zadania studenta:</h2>
+    <ul class="list-group" id="tasksStudentList"></ul>
+    <p class="lead"><br /><h1>Lista studentów:</h1></p>
+    <a class="btn btn-primary " onclick="GetStudentListSmallInformation('#studentsListShow');" role="button">Wyświetl studentów</a>
+    <a class="btn btn-info" role="button" onclick="CleanField('#studentsListShow');">Ukryj</a>
+    <ul class="list-group" id="studentsListShow"></ul>
+    <p class="lead"><br /><h1>Lista zadań:</h1></p>
+    <a class="btn btn-primary " onclick="GetTaskList('#tasksList');" role="button">Wyświetl wszystkie zadania</a>
+    <a class="btn btn-info" role="button" onclick="CleanField('#tasksList');">Ukryj</a>
+    <ul class="list-group" id="tasksList"></ul>
+    <script src="scripts/jquery-3.2.1.min.js"></script>
+    <script src="scripts/tether.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/universities.js?newversion"></script>
+    <script src="scripts/students.js?newversion"></script>
+    <script src="scripts/tasks.js?newversion"></script>
+</body>
+</html>
+
+
+
+

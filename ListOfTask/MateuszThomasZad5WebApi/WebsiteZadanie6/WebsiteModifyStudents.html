@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify students</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="fonts/loader.css" /> 
+    <meta charset="utf-8" />
+</head>
+<body  onload="loadStudents('#selectStudentModifyOrRemove');">
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <center><h1 class="display-2">Notatnik studenckich zadań</h1></center>
+        </div>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="WebsiteShow.html">Wyświetlanie danych</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" id="nav-link-active" href="#">Edycja danych o studentach</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="WebsiteModifyTasks.html">Edycja o zadaniach</a>
+        </li>
+    </ul>
+    <div class="modal fade" id="modalErrorInputDataStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nie udało się wykonać czynności</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Podane dane są niepoprawne lub niekompletne. Uzupełnij poprawnie wprowadzane dane.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalSuccessAddStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sukces</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Wykonano poprawnie czynność.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="lead"><br /><h1>Lista studentów:</h1></p>
+    <a class="btn btn-primary " onclick="GetStudentListSmallInformation('#studentsListModify');" role="button">Wyświetl studentów</a>
+    <a class="btn btn-info" role="button" onclick="CleanField('#studentsListModify');">Ukryj</a>
+    <div class="row">
+        <div class="col-lg-6">
+            <ul class="list-group" id="studentsListModify"></ul>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <p class="lead"><br /><h1>Dodaj studenta:</h1></p>
+                <br />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Imię</span>
+                            <input type="text" class="form-control" id="studentName"
+                                   placeholder="tu wpisz imię studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Nazwisko</span>
+                            <input type="text" class="form-control" id="studentSurname"
+                                   placeholder="tu wpisz nazwisko studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Email</span>
+                            <input type="text" class="form-control" id="studentEmail"
+                                   placeholder="tu wpisz email studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Numer telefonu</span>
+                            <input type="text" class="form-control" id="studentPhoneNumber"
+                                   placeholder="numer telefonu studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Numer indeksu</span>
+                            <input type="text" class="form-control" id="studentIndexNumber"
+                                   placeholder="numer indeksu studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Numer ID uczelni</span>
+                            <input type="text" class="form-control" id="studentUniversityID"
+                                   placeholder="numer ID uczelni studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button id="postButton" class="btn btn-success" onclick="postStudent();">
+                            Dodaj
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <p class="lead"><br /><h1>Usuń lub modyfikuj studenta:</h1></p>
+                <br/>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Wybierz studenta:</span>
+                            <select class="selectpicker" id="selectStudentModifyOrRemove"></select>
+                            <button id="post" class="btn btn-success" onclick="loadStudent();">
+                                Wybierz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">ID</span>
+                            <input type="text" class="form-control" id="studentIDModify"
+                                   placeholder="numer ID studenta" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Imię</span>
+                            <input type="text" class="form-control" id="studentNameModify"
+                                   placeholder="tu wpisz imię studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+
+                            <span class="input-group-addon">Nazwisko</span>
+                            <input type="text" class="form-control" id="studentSurnameModify"
+                                   placeholder="tu wpisz nazwisko studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Email</span>
+                            <input type="text" class="form-control" id="studentEmailModify"
+                                   placeholder="tu wpisz email studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Numer telefonu</span>
+                            <input type="text" class="form-control" id="studentPhoneNumberModify"
+                                   placeholder="numer telefonu studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Numer indeksu</span>
+                            <input type="text" class="form-control" id="studentIndexNumberModify"
+                                   placeholder="numer indeksu studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Numer ID uczelni</span>
+                            <input type="text" class="form-control" id="studentUniversityIDModify"
+                                   placeholder="numer ID uczelni studenta" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <button id="deleteButton" class="btn btn-success" onclick="deleteStudent();">
+                                Usuń
+                            </button>
+                            <button id="putButton" class="btn btn-success" onclick="putStudent();">
+                                Modyfikuj
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+        </div>
+        <script src="scripts/jquery-3.2.1.min.js"></script>
+        <script src="scripts/tether.min.js"></script>
+        <script src="scripts/bootstrap.min.js"></script>
+        <script src="scripts/universities.js?newversion"></script>
+        <script src="scripts/students.js?newversion"></script>
+        <script src="scripts/tasks.js?newversion"></script>
+</body>
+</html>
